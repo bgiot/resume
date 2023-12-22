@@ -1,44 +1,41 @@
 {
-    "name": "Anna Quincey",
-    "occupation": "Front-End Developer",
-    "location": "Vienna, AT",
+    "name": "Bertrand Giot",
+    "occupation": ".NET Solution Architect",
+    "location": "Belgium",
     "avatar": "avatar.jpg",
-    "pronouns": "she/her",
-    "email": "anna.quincey@gmail.com",
-    "telephone": "+01 23 456 789",
-    "website": "https://annaquincey.dev",
+    "pronouns": "he/his",
+    "email": "bertrand.giot@dotconsulting.be",
+    "telephone": "+32 495 53 73 09",
+    "website": "https://bertrand.giot.be",
     "skills": [
-        "HTML",
-        "CSS",
-        "Javascript / ES6",
-        "UI Design",
+        ".net",
+        "c#",
+        "typescript",
+        "SQL Server",
         "React",
-        "Git"
+        "Git",
+        "Azure"
     ],
     "languages": [
         {
-            "name": "English",
+            "name": "French",
             "level": "native"
         },
         {
-            "name": "German",
+            "name": "English",
             "level": "fluent"
-        },
-        {
-            "name": "French",
-            "level": "basic"
         }
     ],
     "social": [
         {
             "name": "Github",
-            "user": "@annaquincey",
-            "url": "https://github.com/annaquincey"
+            "user": "@bgiot",
+            "url": "https://github.com/bgiot"
         },
         {
             "name": "LinkedIn",
-            "user": "AnnaQncy",
-            "url": "https://www.linkedin.com/in/annaquincey"
+            "user": "bertrand-g-07b482",
+            "url": "https://www.linkedin.com/in/bertrand-g-07b482"
         }
     ]
 }

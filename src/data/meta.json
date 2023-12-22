@@ -1,9 +1,9 @@
 {
-    "url": "https://demo-resume.netlify.app",
+    "url": "https://bertrand.giot.be",
     "lang": "en",
     "locale": "en_us",
     "colors": {
-        "primary": "#005b96",
-        "secondary": "#fc6767"
+        "primary": "#ff5733",
+        "secondary": "#333fff"
     }
 }
