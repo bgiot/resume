@@ -2,18 +2,23 @@
 // It will run webpack with babel over all JS defined in the main entry file.
 
 // main entry point name
-const ENTRY_FILE_NAME = 'main.js'
 
-const fs = require('fs')
-const path = require('path')
-const webpack = require('webpack')
-const { fs: mfs } = require('memfs')
+import fs from 'fs'
+import path from 'path'
+import webpack from 'webpack'
+import { fs as mfs } from 'memfs'
+import { fileURLToPath } from 'url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+const ENTRY_FILE_NAME = 'main.js'
 
 const isProd = process.env.ELEVENTY_ENV === 'production'
 
-module.exports = class {
+export default { data, compile, render }
+
     // Configure Webpack in Here
-    async data() {
+export async function data() {
         const entryPath = path.join(__dirname, `/${ENTRY_FILE_NAME}`)
         const outputPath = path.resolve(__dirname, '../../memory-fs/js/')
 
@@ -56,7 +61,7 @@ module.exports = class {
     // Compile JS with Webpack, write the result to Memory Filesystem.
     // this brilliant idea is taken from Mike Riethmuller / Supermaya
     // @see https://github.com/MadeByMike/supermaya/blob/master/site/utils/compile-webpack.js
-    compile(webpackConfig) {
+export function compile(webpackConfig) {
         const compiler = webpack(webpackConfig)
         compiler.outputFileSystem = mfs
         compiler.inputFileSystem = fs
@@ -86,7 +91,7 @@ module.exports = class {
     }
 
     // render the JS file
-    async render({ webpackConfig }) {
+export async function render({ webpackConfig }) {
         try {
             const result = await this.compile(webpackConfig)
             return result
@@ -95,4 +100,4 @@ module.exports = class {
             return null
         }
     }
-}
+

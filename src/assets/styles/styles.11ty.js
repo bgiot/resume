@@ -2,16 +2,22 @@
 // It will run Sass and compile all styles defined in the main entry file.
 
 // main entry point name
+
+import path from 'path'
+import sass from 'node-sass'
+import CleanCSS from 'clean-css'
+import cssesc  from 'cssesc'
+import { fileURLToPath } from 'url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
 const ENTRY_FILE_NAME = 'main.scss'
 
-const path = require('path')
-const sass = require('node-sass')
-const CleanCSS = require('clean-css')
-const cssesc = require('cssesc')
 const isProd = process.env.ELEVENTY_ENV === 'production'
 
-module.exports = class {
-    async data() {
+export default { data, compile, minify, render, renderError }
+
+ export async function data() {
         const entryPath = path.join(__dirname, `/${ENTRY_FILE_NAME}`)
         return {
             permalink: `/assets/styles/main.css`,
@@ -22,7 +28,7 @@ module.exports = class {
 
     // Compile Sass to CSS,
     // Embed Source Map in Development
-    async compile(config) {
+ export  async function compile(config) {
         return new Promise((resolve, reject) => {
             if (!isProd) {
                 config.sourceMap = true
@@ -39,7 +45,7 @@ module.exports = class {
     }
 
     // Minify & Optimize with CleanCSS in Production
-    async minify(css) {
+export  async  function minify(css) {
         return new Promise((resolve, reject) => {
             if (!isProd) {
                 resolve(css)
@@ -55,7 +61,7 @@ module.exports = class {
     // display an error overlay when CSS build fails.
     // this brilliant idea is taken from Mike Riethmuller / Supermaya
     // @see https://github.com/MadeByMike/supermaya/blob/master/site/utils/compile-scss.js
-    renderError(error) {
+ export function  renderError(error) {
         return `
         /* Error compiling stylesheet */
         *,
@@ -98,7 +104,7 @@ module.exports = class {
     }
 
     // render the CSS file
-    async render({ entryPath }) {
+ export async function render({ entryPath }) {
         try {
             const css = await this.compile({ file: entryPath })
             const result = await this.minify(css)
@@ -116,4 +122,4 @@ module.exports = class {
             }
         }
     }
-}
+

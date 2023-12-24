@@ -1,50 +1,53 @@
-const fs = require('fs')
-const path = require('path')
-const mime = require('mime/lite')
-const { DateTime } = require('luxon')
-const isEmpty = require('lodash/isEmpty')
+import fs from 'fs'
+import path from 'path'
+import mime from 'mime'
+import { DateTime } from 'luxon'
+import { fileURLToPath } from 'url'
 
-module.exports = {
-    dateToFormat: function (date, format) {
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+export default {dateToFormat, dateToISO, obfuscate, stripSpaces, base64file, themeColors, stripProtocol }
+
+  export  function dateToFormat (date, format) {
         return DateTime.fromJSDate(date, { zone: 'utc' }).toFormat(
             String(format)
         )
-    },
+    }
 
-    dateToISO: function (date) {
+    export function dateToISO (date) {
         return DateTime.fromJSDate(date, { zone: 'utc' }).toISO({
             includeOffset: false,
             suppressMilliseconds: true
         })
-    },
+    }
 
-    obfuscate: function (str) {
+    export function obfuscate (str) {
         const chars = []
         for (var i = str.length - 1; i >= 0; i--) {
             chars.unshift(['&#', str[i].charCodeAt(), ';'].join(''))
         }
         return chars.join('')
-    },
+    }
 
-    stripSpaces: function (str) {
+    export function stripSpaces (str) {
         return str.replace(/\s/g, '')
-    },
+    }
 
-    stripProtocol: function (str) {
+    export function stripProtocol (str) {
         return str.replace(/(^\w+:|^)\/\//, '')
-    },
+    }
 
-    base64file: function (file) {
+    export function base64file(file) {
         const filepath = path.join(__dirname, `../src/${file}`)
         const mimeType = mime.getType(file)
         const buffer = Buffer.from(fs.readFileSync(filepath))
 
         return `data:${mimeType};base64,${buffer.toString('base64')}`
-    },
+    }
 
-    themeColors: function (colors) {
+    export function themeColors(colors) {
         let style = ''
-        if (!colors || isEmpty(colors)) {
+        if (!colors) {
             return ''
         }
         if (colors.primary) {
@@ -55,4 +58,4 @@ module.exports = {
         }
         return style
     }
-}
+

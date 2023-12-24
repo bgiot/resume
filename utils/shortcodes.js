@@ -1,5 +1,7 @@
-module.exports = {
-    icon: function (name, isSocial) {
+
+export default { icon }
+
+    export function icon(name, isSocial) {
         const id = name.toLowerCase().replace(/\s/g, '')
         const availableSocialIcons = [
             'github',
@@ -20,4 +22,4 @@ module.exports = {
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-${id}"></use>
                 </svg>`
     }
-}
+
