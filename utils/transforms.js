@@ -1,5 +1,5 @@
 import * as htmlmincore from 'html-minifier'
-import * as criticalccore from 'critical'
+import * as criticalcore from 'critical'
 
 const buildDir = 'dist'
 
