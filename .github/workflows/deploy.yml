@@ -13,7 +13,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, 
       # so your workflow can access it
       - name: check-out master branch
-      - uses: actions/checkout@master
+        uses: actions/checkout@master
       
       - name: Set up Node.js
         uses: actions/setup-node@v1.2.0
