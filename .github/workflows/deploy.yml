@@ -23,12 +23,10 @@ jobs:
 
       # Copying files and artifacts via SSH
       - name: Copying files to server
-        uses: appleboy/scp-action@master
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
-          rm: true
-          source: "html/"
-          target: "${{ secrets.REMOTE_DIR }}"
+          server: ftp.cluster002.hosting.ovh.net
+          username: dotconsu
+          password: ${{ secrets.ftp_password }}
+          local-dir: html/
+          server-dir: www2/
