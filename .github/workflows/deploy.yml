@@ -31,7 +31,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ftp.cluster002.hosting.ovh.net
-          username: dotconsu
+          username: ${{ secrets.ftp_userid }}
           password: ${{ secrets.ftp_password }}
           local-dir: dist/
           server-dir: www2/
