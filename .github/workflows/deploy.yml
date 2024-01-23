@@ -12,14 +12,19 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, 
       # so your workflow can access it
+      - name: check-out master branch
       - uses: actions/checkout@master
-
-      # Build your static website with Eleventy
-      - name: Build Eleventy
-        uses: TartanLlama/actions-eleventy@master
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v1.2.0
         with:
-          args: --output html
-          install_dependencies: true
+          node-version: '10.x'
+      
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build 
+        run: npm run build
 
       # Copying files and artifacts via SSH
       - name: Copying files to server
@@ -28,5 +33,5 @@ jobs:
           server: ftp.cluster002.hosting.ovh.net
           username: dotconsu
           password: ${{ secrets.ftp_password }}
-          local-dir: html/
+          local-dir: dist/
           server-dir: www2/
